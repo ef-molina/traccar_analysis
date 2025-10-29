@@ -164,3 +164,49 @@ jar {
                 "Class-Path": configurations.runtimeClasspath.files.collect { "lib/$it.name" }.join(" "))
     }
 }
+
+// JDepend configuration for architectural analysis
+configurations {
+    jdepend
+}
+
+dependencies {
+    jdepend 'jdepend:jdepend:2.9.1'
+}
+
+tasks.register('jdependReport', JavaExec) {
+    group = 'verification'
+    description = 'Generates JDepend architectural analysis report'
+    
+    classpath = configurations.jdepend
+    mainClass = 'jdepend.textui.JDepend'
+    
+    def outputDir = file("$buildDir/reports/jdepend")
+    def xmlOutput = file("$outputDir/jdepend-report.xml")
+    
+    doFirst {
+        outputDir.mkdirs()
+    }
+    
+    // Generate XML report
+    args = ['-file', xmlOutput.absolutePath, file("$buildDir/classes/java/main").absolutePath]
+    
+    doLast {
+        println ""
+        println "======================================"
+        println "JDepend Analysis Complete!"
+        println "======================================"
+        println "XML Report: ${xmlOutput.absolutePath}"
+        println ""
+        println "The XML report contains architectural metrics including:"
+        println "  - Package dependencies"
+        println "  - Afferent and Efferent coupling"
+        println "  - Abstractness and Instability metrics"
+        println "  - Distance from main sequence"
+        println "  - Package dependency cycles"
+        println ""
+    }
+}
+
+jdependReport.dependsOn(classes)
+
