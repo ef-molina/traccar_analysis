@@ -181,7 +181,7 @@ tasks.register('jdependReport', JavaExec) {
     classpath = configurations.jdepend
     mainClass = 'jdepend.textui.JDepend'
     
-    def outputDir = file("$buildDir/reports/jdepend")
+    def outputDir = file("${layout.buildDirectory.get()}/reports/jdepend")
     def xmlOutput = file("$outputDir/jdepend-report.xml")
     
     doFirst {
@@ -189,7 +189,7 @@ tasks.register('jdependReport', JavaExec) {
     }
     
     // Generate XML report
-    args = ['-file', xmlOutput.absolutePath, file("$buildDir/classes/java/main").absolutePath]
+    args = ['-file', xmlOutput.absolutePath, file("${layout.buildDirectory.get()}/classes/java/main").absolutePath]
     
     doLast {
         println ""

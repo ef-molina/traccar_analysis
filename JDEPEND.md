@@ -42,7 +42,7 @@ The JDepend report includes the following metrics for each package:
   
 - **I (Instability)**: Ratio of Ce / (Ce + Ca) (0 to 1)
   - 0 = maximally stable
-  - 1 = maximally instable
+  - 1 = maximally unstable
   
 - **D (Distance from Main Sequence)**: Measure of balance between abstractness and stability
   - Calculated as: |A + I - 1|
