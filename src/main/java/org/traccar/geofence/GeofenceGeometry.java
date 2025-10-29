@@ -15,8 +15,6 @@
  */
 package org.traccar.geofence;
 
-import org.traccar.helper.DistanceCalculator;
-
 import java.util.List;
 
 public abstract class GeofenceGeometry {
@@ -47,10 +45,10 @@ public abstract class GeofenceGeometry {
             maxLon = Math.max(maxLon, current.lon());
         }
         if (padding > 0) {
-            double latPadding = DistanceCalculator.getLatitudeDelta(padding);
+            double latPadding = GeofenceDistanceCalculator.getLatitudeDelta(padding);
             double lonPadding = Math.max(
-                    DistanceCalculator.getLongitudeDelta(padding, minLat),
-                    DistanceCalculator.getLongitudeDelta(padding, maxLat));
+                    GeofenceDistanceCalculator.getLongitudeDelta(padding, minLat),
+                    GeofenceDistanceCalculator.getLongitudeDelta(padding, maxLat));
             setMin(new Coordinate(minLat - latPadding, minLon - lonPadding));
             setMax(new Coordinate(maxLat + latPadding, maxLon + lonPadding));
         } else {

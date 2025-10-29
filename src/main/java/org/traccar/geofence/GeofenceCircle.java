@@ -18,8 +18,6 @@ package org.traccar.geofence;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
-import org.traccar.helper.DistanceCalculator;
-
 public class GeofenceCircle extends GeofenceGeometry {
 
     private final double centerLatitude;
@@ -37,7 +35,7 @@ public class GeofenceCircle extends GeofenceGeometry {
 
     @Override
     protected boolean containsPointInternal(double latitude, double longitude) {
-        return DistanceCalculator.distance(centerLatitude, centerLongitude, latitude, longitude) <= radius;
+        return GeofenceDistanceCalculator.distance(centerLatitude, centerLongitude, latitude, longitude) <= radius;
     }
 
     @Override
