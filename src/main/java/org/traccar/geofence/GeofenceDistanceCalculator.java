@@ -16,6 +16,13 @@
  */
 package org.traccar.geofence;
 
+/**
+ * Package-private distance calculator for geofence operations.
+ * This class intentionally duplicates functionality from org.traccar.helper.DistanceCalculator
+ * to reduce efferent coupling and improve the architectural metrics (JDepend) of the geofence package.
+ * By keeping distance calculations internal to the geofence package, we achieve better package stability
+ * and maintain the geofence package closer to the main sequence in the dependency graph.
+ */
 final class GeofenceDistanceCalculator {
 
     private GeofenceDistanceCalculator() {
